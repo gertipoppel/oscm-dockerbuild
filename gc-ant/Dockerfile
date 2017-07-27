@@ -2,9 +2,8 @@ FROM oscm-sles-based
 
 ENV JAVA_HOME /usr/lib64/jvm/java-1.8.0-openjdk
 ENV ANT_HOME /usr/share/ant
-
-RUN export http_proxy=$HTTP_PROXY && \
-    export https_proxy=$HTTPS_PROXY
+ENV http_proxy $HTTP_PROXY 
+ENV https_proxy $HTTPS_PROXY
     
 RUN echo $http_proxy    
 RUN echo $https_proxy
