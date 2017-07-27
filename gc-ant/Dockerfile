@@ -1,11 +1,17 @@
-FROM ubuntu
+FROM oscm-sles-based
 
-ENV JAVA_HOME /usr/lib/jvm/java-1.8.0-openjdk-amd64
+ENV JAVA_HOME /usr/lib64/jvm/java-1.8.0-openjdk
 ENV ANT_HOME /usr/share/ant
-ENV IVY_HOME /usr/share/java
 
-RUN apt-get update && \
-    apt-get update && apt-get -y install hostname openjdk-8-jre openjdk-8-jdk ant ant-optional ivy && \
-    cp $IVY_HOME/ivy.jar $ANT_HOME/lib/
+RUN export http_proxy=$HTTP_PROXY && \
+    export https_proxy=$HTTPS_PROXY
+    
+RUN zypper -n in \
+    java-1_8_0-openjdk \
+    java-1_8_0-openjdk-devel \
+    ant \
+    wget
+    
+RUN wget https://repo1.maven.org/maven2/org/apache/ivy/ivy/2.4.0/ivy-2.4.0.jar  -O $ANT_HOME/lib/ivy.jar
 
 ENTRYPOINT ["ant"]
