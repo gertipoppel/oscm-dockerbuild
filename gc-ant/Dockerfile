@@ -14,7 +14,6 @@ RUN zypper -n in \
     ant \
     wget
     
-RUN wget https://repo1.maven.org/maven2/org/apache/ivy/ivy/2.4.0/ivy-2.4.0.jar -O /usr/share/java/ivy.jar && \
-    ln -s ../../java/ivy.jar $ANT_HOME/lib/ivy.jar
+RUN wget https://repo1.maven.org/maven2/org/apache/ivy/ivy/2.4.0/ivy-2.4.0.jar  -O $ANT_HOME/lib/ivy.jar
 
 ENTRYPOINT ["ant"]
